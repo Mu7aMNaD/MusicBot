@@ -38,7 +38,7 @@ public class SettingsManager implements GuildSettingsManager
     {
         this.settings = new HashMap<>();
         try {
-            JSONObject loadedSettings = new JSONObject(new String(Files.readAllBytes(OtherUtil.getPath("serversettings.json"))));
+            JSONObject loadedSettings = new JSONObject(new String(Files.readAllBytes(OtherUtil.getPath("serversettings.main"))));
             loadedSettings.keySet().forEach((id) -> {
                 JSONObject o = loadedSettings.getJSONObject(id);
                 settings.put(Long.parseLong(id), new Settings(this,
@@ -100,7 +100,7 @@ public class SettingsManager implements GuildSettingsManager
             obj.put(Long.toString(key), o);
         });
         try {
-            Files.write(OtherUtil.getPath("serversettings.json"), obj.toString(4).getBytes());
+            Files.write(OtherUtil.getPath("serversettings.main"), obj.toString(4).getBytes());
         } catch(IOException ex){
             LoggerFactory.getLogger("Settings").warn("Failed to write to file: "+ex);
         }
